@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        *{ margin:0; padding:0;}
+        body {height:100%; width:100%; overflow:hidden;}
+        #menu { top: 1rem; right: 1rem; position: fixed; z-index:9999; }
+    </style>
+    <title>p5.js</title>
+</head>
+<body>
+    <!-- este será el munú -->
+    <select id="menu" onchange="location=this.value;">
+        <option value="index.html">Primero</option>
+        <option value="segundo.html" selected>Segundo</option>
+        <option value="tercero.html">Tercero</option>
+        <option value="cuarto.html">Cuarto</option>
+    </select>
+    <!-- este div recibirá al canvas-->
+    <div id="aqui"></div>
+    <!-- vamos a buscar la biblioteca -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script>
+        
+        
+     
+        var a;
+        
+        function setup() {
+            createCanvas(windowWidth,windowHeight).parent("aqui");
+            frameRate(10);
+            noLoop();
+        }
+        
+        function mousePressed() {
+            loop();
+        }
+        function mouseReleased() {
+            noLoop();
+        }
+        
+        function draw() 
+        { 
+            background("black");
+            noStroke();
+        	for (var x = 0; x < windowWidth; x = x + 15){
+        		for (var y = 0; y < windowHeight; y = y + 15){
+            		rect(x, y,10,10);
+                   
+                    fill(255,100,100,random(255));
+                    noStroke();
+                }
+            } 
+            {textSize(32);
+             textStyle(BOLD);
+                 fill("white");
+                 text('CLICK', windowWidth/2-70, windowHeight/2);
+                 }
+        }
+        
+       
+        
+        
+   
+        
+        function windowResized(){
+            resizeCanvas(windowWidth, windowHeight);
+        }        
+    </script>
+</body>
+</html>

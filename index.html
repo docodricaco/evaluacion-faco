@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        *{ margin:0; padding:0;}
+        body {height:100%; width:100%; overflow:hidden;}
+        #menu { top: 1rem; right: 1rem; position: fixed; z-index:9999; }
+    </style>
+    <title>p5.js</title>
+</head>
+<body>
+    <!-- este será el munú -->
+    <select id="menu" onchange="location=this.value;">
+        <option value="index.html" selected>Primero</option>
+        <option value="segundo.html">Segundo</option>
+        <option value="tercero.html">Tercero</option>
+        <option value="cuarto.html">Cuarto</option>
+    </select>
+    <!-- este div recibirá al canvas-->
+    <div id="aqui"></div>
+    <!-- vamos a buscar la biblioteca -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script>
+        
+        var data, total;
+        function preload() {
+            data = loadJSON('https://api.myjson.com/bins/ox9r4');
+        }
+        
+        function setup() {
+            createCanvas(windowWidth,windowHeight).parent("aqui");
+            background(12, 183, 242,50)
+            print(data);
+            noLoop();
+            noStroke();
+            textAlign(CENTER);
+            
+       
+            
+            for(var n = 0; n < 6; n++){
+                if(data[n].unidadesvendidas > 700){
+                    fill(255,0,0);
+                } else {
+                    fill(100);
+                }
+                ellipse(
+                    width/7*(n+1),
+                    900-data[n].unidadesvendidas,
+                    data[n].unidadesvendidas/7,
+                    data[n].unidadesvendidas/7,
+                    );                
+               
+                fill("red");
+                textSize(13);
+                textStyle(BOLD);
+                textFont("Arial")
+                text(
+                    data[n].juego,
+                    width/7*(n+1),
+                    (height/1-200)
+                    );
+                
+                fill("white")
+                text(
+                    data[n].unidadesvendidas,
+                    width/7*(n+1),
+                    (905-data[n].unidadesvendidas))
+                
+                fill("black")
+                textSize(32)
+                text(
+                'Ventas obtenidas de las últimas entregas de la saga Metal Gear',
+                width/2,
+                850)
+            }
+        }
+        
+        
+        function windowResized(){
+            resizeCanvas(windowWidth, windowHeight);
+            background(230);
+        }        
+    </script>
+</body>
+</html>
